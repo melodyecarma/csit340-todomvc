@@ -26,8 +26,15 @@ function Todos() {
   function handleDelete(id) {
     setTodos(todos.filter((todo) => todo.id !== id))
   }
+  
+  function handleClearCompleted() {
+    setTodos(todos.filter((todo) => !todo.completed))
+  }
+
 
   const activateCounter = todos.filter((todo) => !todo.completed).length
+  const completedCounter = todos.length - activateCounter
+
 
 
   return (
@@ -122,9 +129,15 @@ function Todos() {
               </button>
             </li>
           </ul>
-          <button type="button" className="cursor-pointer justify-self-end hover:underline">
-            Clear completed
-          </button>
+          {completedCounter > 0 && (
+            <button
+              type="button"
+              onClick={handleClearCompleted}
+              className="cursor-pointer justify-self-end hover:underline"
+            >
+              Clear completed
+            </button>
+          )}
         </footer>
         </>
       )}
